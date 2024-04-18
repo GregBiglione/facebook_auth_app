@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755532893018",
+    "project_id": "facebookauthapp-9d959",
+    "storage_bucket": "facebookauthapp-9d959.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755532893018:android:b42926a2c2a07677ab4163",
+        "android_client_info": {
+          "package_name": "com.example.facebook_auth_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFvBMZ76zZydAtUkeEneN234raIbjkxds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
