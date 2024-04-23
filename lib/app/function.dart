@@ -2,6 +2,8 @@ import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
+import '../presentation/resource/route_manager.dart';
+
 // Error toast -----------------------------------------------------------------
 
 void errorToast(BuildContext context, String message) => toastification.show(
@@ -14,3 +16,13 @@ void errorToast(BuildContext context, String message) => toastification.show(
   alignment: Alignment.bottomCenter,
   backgroundColor: ColorManager.error,
 );
+
+// Go to home screen -----------------------------------------------------------
+
+void goToHomeScreen(BuildContext context) => WidgetsBinding.instance
+    .addPostFrameCallback((timeStamp) {
+      Navigator.pushReplacementNamed(
+        context,
+        Routes.homeRoute,
+      );
+});
