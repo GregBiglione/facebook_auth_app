@@ -1,5 +1,6 @@
 import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:facebook_auth_app/presentation/resource/string_manager.dart';
+import 'package:facebook_auth_app/presentation/screen/home/home_screen.dart';
 import 'package:facebook_auth_app/presentation/screen/login/login_screen.dart';
 import 'package:facebook_auth_app/presentation/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String splashRoute = "/";
   static const String loginRoute = "/login";
+  static const String homeRoute = "/home";
 }
 
 class RouteGenerator {
@@ -19,6 +21,10 @@ class RouteGenerator {
       case Routes.loginRoute:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
+        );
+      case Routes.homeRoute:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
         );
       default:
         return undefinedRoute();
