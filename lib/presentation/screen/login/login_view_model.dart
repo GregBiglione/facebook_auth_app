@@ -13,7 +13,7 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel(this._authUseCase);
 
   // Getters -------------------------------------------------------------------
-  Stream<StateRender> get controller => _responseController.stream;
+  Stream<StateRender> get response => _responseController.stream;
 
   // ---------------------------------------------------------------------------
   // Facebook login

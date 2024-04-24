@@ -1,14 +1,15 @@
 import 'package:facebook_auth_app/presentation/resource/string_manager.dart';
 import 'package:facebook_auth_app/presentation/resource/value_manager.dart';
+import 'package:facebook_auth_app/presentation/screen/login/login_view_model.dart';
 import 'package:facebook_auth_app/presentation/widget/facebook_button_widget.dart';
 import 'package:facebook_auth_app/presentation/widget/padding_widget.dart';
 import 'package:facebook_auth_app/presentation/widget/title_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../app/constant.dart';
-
 class LoginContent extends StatefulWidget {
-  const LoginContent({super.key});
+  final LoginViewModel viewModel;
+
+  const LoginContent({super.key, required this.viewModel});
 
   @override
   State<LoginContent> createState() => _LoginContentState();
@@ -37,7 +38,7 @@ class _LoginContentState extends State<LoginContent> {
         ),
         FacebookButtonWidget(
           onPressed: () {
-            logger.i("Facebook button clicked");
+            widget.viewModel.facebookLogin();
           },
         ),
       ],
