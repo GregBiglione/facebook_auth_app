@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
+import '../domain/utils/state_render.dart';
 import '../presentation/resource/route_manager.dart';
 
 // Error toast -----------------------------------------------------------------
@@ -26,3 +29,11 @@ void goToHomeScreen(BuildContext context) => WidgetsBinding.instance
         Routes.homeRoute,
       );
 });
+
+void removeLoadingScreen(Timer? timer, int duration, 
+    StreamController streamController) {
+  timer = Timer(
+    Duration(seconds: duration), 
+    () => streamController.add(Init()),
+  );
+}
