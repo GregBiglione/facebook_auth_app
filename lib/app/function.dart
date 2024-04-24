@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:facebook_auth_app/domain/utils/state_render.dart';
 import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
@@ -26,3 +29,13 @@ void goToHomeScreen(BuildContext context) => WidgetsBinding.instance
         Routes.homeRoute,
       );
 });
+
+// Remove loading screen -------------------------------------------------------
+
+void removeLoadingScreen(Timer? timer, int duration, 
+    StreamController streamController) {
+  timer = Timer(
+    Duration(seconds: duration), 
+    () => streamController.add(Init()),
+  );
+}
