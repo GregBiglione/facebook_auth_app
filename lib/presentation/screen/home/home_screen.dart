@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.black,
       appBar: GradientAppBar(
+        automaticallyImplyLeading: false,
         gradient: LinearGradient(
           colors: [
             ColorManager.primary,
