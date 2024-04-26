@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:facebook_auth_app/app/di/injection.dart';
+import 'package:facebook_auth_app/domain/usecase/auth/auth_usecase.dart';
 import 'package:facebook_auth_app/domain/utils/state_render.dart';
+import 'package:facebook_auth_app/main.dart';
 import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
@@ -39,3 +42,13 @@ void removeLoadingScreen(Timer? timer, int duration,
     () => streamController.add(Init()),
   );
 }
+
+// Go to main after logout -----------------------------------------------------
+
+void logoutNavigation(BuildContext context) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MyApp(getIt<AuthUseCase>()),
+    ),
+    (route) => false,
+);
