@@ -1,8 +1,12 @@
+import 'package:facebook_auth_app/app/app_preferences.dart';
+import 'package:facebook_auth_app/app/di/injection.dart';
 import 'package:facebook_auth_app/domain/repository/auth/auth_repository.dart';
 import 'package:facebook_auth_app/domain/utils/state_render.dart';
 import 'package:facebook_auth_app/presentation/resource/string_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+final AppPreferences _appPreferences = getIt<AppPreferences>();
 
 class AuthRepositoryImplementer extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -18,6 +22,7 @@ class AuthRepositoryImplementer extends AuthRepository {
 
       final UserCredential userCredential = await _firebaseAuth
           .signInWithCredential(credential);
+      _appPreferences.setUserLogged();
 
       return Success(userCredential.user);
     }

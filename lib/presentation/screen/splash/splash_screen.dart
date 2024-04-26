@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:facebook_auth_app/app/app_preferences.dart';
 import 'package:facebook_auth_app/presentation/resource/color_manager.dart';
 import 'package:facebook_auth_app/presentation/resource/string_manager.dart';
 import 'package:facebook_auth_app/presentation/resource/style_manager.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../app/di/injection.dart';
 import '../../resource/route_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,16 +21,27 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
+  final AppPreferences _appPreferences = getIt<AppPreferences>();
 
   //----------------------------------------------------------------------------
-  // Go to Login Screen
+  // Go to Login/Home Screen
   //----------------------------------------------------------------------------
 
   _goToLoginScreen() {
-    Navigator.pushReplacementNamed(
-      context,
-      Routes.loginRoute,
-    );
+    _appPreferences.isUserLogged().then((value) {
+      if(value == false) {
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.loginRoute,
+        );
+      }
+      else {
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.homeRoute,
+        );
+      }
+    });
   }
 
   //----------------------------------------------------------------------------
