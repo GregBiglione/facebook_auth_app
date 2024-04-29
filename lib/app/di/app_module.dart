@@ -26,6 +26,7 @@ abstract class AppModule {
 
   AuthRepository get authRepository => AuthRepositoryImplementer(
     firebaseAuth,
+    firebaseFirestore,
     usersCollection,
   );
 
