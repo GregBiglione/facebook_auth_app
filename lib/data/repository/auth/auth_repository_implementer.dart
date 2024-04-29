@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facebook_auth_app/app/app_preferences.dart';
 import 'package:facebook_auth_app/app/constant.dart';
 import 'package:facebook_auth_app/app/di/injection.dart';
+import 'package:facebook_auth_app/domain/model/user_data.dart';
 import 'package:facebook_auth_app/domain/repository/auth/auth_repository.dart';
 import 'package:facebook_auth_app/domain/utils/state_render.dart';
 import 'package:facebook_auth_app/presentation/resource/string_manager.dart';
@@ -13,9 +14,10 @@ final AppPreferences _appPreferences = getIt<AppPreferences>();
 
 class AuthRepositoryImplementer extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firebaseFirestore;
   final CollectionReference _usersCollection;
 
-  AuthRepositoryImplementer(this._firebaseAuth,
+  AuthRepositoryImplementer(this._firebaseAuth, this._firebaseFirestore,
       @Named(USER) this._usersCollection);
 
   @override
@@ -28,6 +30,27 @@ class AuthRepositoryImplementer extends AuthRepository {
       final UserCredential userCredential = await _firebaseAuth
           .signInWithCredential(credential);
       _appPreferences.setUserLogged();
+
+      // Firestore -------------------------------------------------------------
+
+      final DocumentSnapshot ds = await _firebaseFirestore
+          .collection(USER)
+          .doc(user?.uid)
+          .get();
+
+      if(!ds.exists) {
+        UserData userData = UserData(
+          uid: user!.uid,
+          name: user!.displayName!,
+          team: "49ers",
+          position: "WR",
+          number: "#81",
+        );
+
+        await _usersCollection
+            .doc(userData.uid)
+            .set(userData.toJson());
+      }
 
       return Success(userCredential.user);
     }
