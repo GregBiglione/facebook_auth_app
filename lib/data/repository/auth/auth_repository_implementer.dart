@@ -31,6 +31,13 @@ class AuthRepositoryImplementer extends AuthRepository {
           .signInWithCredential(credential);
       _appPreferences.setUserLogged();
 
+      FacebookAuth.instance.getUserData().then(
+              (value) {
+                String photo = value["picture"]["data"]["url"];
+                logger.e(photo);
+              }
+      );
+
       // Firestore -------------------------------------------------------------
 
       final DocumentSnapshot ds = await _firebaseFirestore
