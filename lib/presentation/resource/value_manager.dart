@@ -9,6 +9,8 @@ class ValueManager {
   static const double v32 = 32.0;
   static const double v40 = 40.0;
   static const double v50 = 50.0;
+  static const double v65 = 65.0;
   static const double v80 = 80.0;
+  static const double v100 = 100.0;
   static const double infinity = double.infinity;
 }
