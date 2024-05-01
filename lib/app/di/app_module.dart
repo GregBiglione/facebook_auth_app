@@ -10,6 +10,7 @@ import 'package:facebook_auth_app/domain/usecase/auth/logout_usecase.dart';
 import 'package:facebook_auth_app/domain/usecase/auth/user_session_usecase.dart';
 import 'package:facebook_auth_app/domain/usecase/user/user_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/usecase/user/get_user_usecase.dart';
@@ -26,12 +27,16 @@ abstract class AppModule {
   @injectable
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
 
+  @injectable
+  FacebookAuth get facebookAuth => FacebookAuth.instance;
+
   // Repository ----------------------------------------------------------------
 
   @injectable
   AuthRepository get authRepository => AuthRepositoryImplementer(
     firebaseAuth,
     firebaseFirestore,
+    facebookAuth,
     usersCollection,
   );
 
