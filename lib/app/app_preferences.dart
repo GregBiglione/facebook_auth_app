@@ -28,5 +28,22 @@ class AppPreferences {
 
   Future<void> logout() async {
     _sharedPreferences.remove(IS_USER_LOGGED);
+    _sharedPreferences.remove(USER_PHOTO);
+  }
+
+  //----------------------------------------------------------------------------
+  // Set preferences for user photo
+  //----------------------------------------------------------------------------
+
+  Future<void> setPhoto(String photo) async {
+    _sharedPreferences.setString(USER_PHOTO, photo);
+  }
+
+  //----------------------------------------------------------------------------
+  // Get preferences for user photo
+  //----------------------------------------------------------------------------
+
+  Future<String?> getPhoto() async {
+    return _sharedPreferences.getString(USER_PHOTO) ?? "";
   }
 }
