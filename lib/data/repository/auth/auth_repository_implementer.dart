@@ -15,15 +15,16 @@ final AppPreferences _appPreferences = getIt<AppPreferences>();
 class AuthRepositoryImplementer extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
+  final FacebookAuth _facebookAuth;
   final CollectionReference _usersCollection;
 
   AuthRepositoryImplementer(this._firebaseAuth, this._firebaseFirestore,
-      @Named(USER) this._usersCollection);
+      this._facebookAuth, @Named(USER) this._usersCollection);
 
   @override
   Future<StateRender> facebookLogin() async {
     try {
-      final loginResult = await FacebookAuth.instance.login();
+      final loginResult = await _facebookAuth.login();
       final OAuthCredential credential = FacebookAuthProvider
           .credential(loginResult.accessToken!.token);
 
@@ -31,7 +32,7 @@ class AuthRepositoryImplementer extends AuthRepository {
           .signInWithCredential(credential);
       _appPreferences.setUserLogged();
 
-      FacebookAuth.instance.getUserData().then(
+      _facebookAuth.getUserData().then(
               (value) {
                 String photo = value["picture"]["data"]["url"];
                 logger.e(photo);
