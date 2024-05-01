@@ -35,7 +35,7 @@ class AuthRepositoryImplementer extends AuthRepository {
       _facebookAuth.getUserData().then(
               (value) {
                 String photo = value["picture"]["data"]["url"];
-                logger.e(photo);
+                _appPreferences.setPhoto(photo);
               }
       );
 
